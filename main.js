@@ -15,14 +15,19 @@ require("./src/config/mongoose.config");
 
 app.use(
   cors({
-    origin: ["http://localhost:5173"],
+    origin: ["http://localhost:5173", "https://divar-files-main.vercel.app"],
     credentials: true,
+    methods: ["GET", "POST", "PUT", "PATCH", "DELETE", "OPTIONS"],
+    allowedHeaders: ["Content-Type", "Authorization"],
   }),
 );
+
 app.use(express.json());
 app.use(express.urlencoded({ extended: true }));
 app.use(express.static("public"));
+
 app.use(mainRouter);
+
 SwaggerConfig(app);
 NotFoundHandler(app);
 AllExceptionHandler(app);
